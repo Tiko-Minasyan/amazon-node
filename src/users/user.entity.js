@@ -1,35 +1,53 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const schema = new Schema({
-    firstName: {
-        type: String,
-        required: true,
-		trim: true,
-    },
+const schema = new Schema(
+	{
+		firstName: {
+			type: String,
+			required: true,
+			trim: true,
+		},
 
-	lastName: {
-        type: String,
-        required: true,
-		trim: true,
-    },
+		lastName: {
+			type: String,
+			required: true,
+			trim: true,
+		},
 
-	email: {
-		type: String,
-		required: true,
-		unique: true,
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+
+		password: {
+			type: String,
+			required: true,
+			minlength: 8,
+		},
+
+		isVerified: {
+			type: Boolean,
+			default: false,
+		},
+
+		addresses: [
+			{
+				address: {
+					type: String,
+					required: true,
+				},
+
+				isDefault: {
+					type: Boolean,
+					default: false,
+				},
+			},
+		],
 	},
-
-    password: {
-        type: String,
-        required: true,
-    },
-
-	isVerified: {
-		type: Boolean,
-		default: false,
-	}
-}, { collection: 'users' });
+	{ collection: "users" }
+);
 
 // schema.pre('save', function (next) {
 //     if (this.isModified('password')) {
@@ -40,4 +58,4 @@ const schema = new Schema({
 //     next();
 // })
 
-module.exports = mongoose.model('User', schema);
+module.exports = mongoose.model("User", schema);
